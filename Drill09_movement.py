@@ -21,7 +21,7 @@ from pico2d import (
     update_canvas,
 )
 
-from boy_movement import Boy, CANVAS_HEIGHT, CANVAS_WIDTH
+from boy_movement import Boy, CANVAS_HEIGHT, CANVAS_WIDTH, DISPLAY_SIZE
 
 ASSET_DIR = Path(__file__).resolve().parent
 
@@ -67,9 +67,10 @@ def run() -> None:
             boy.update(dt)
 
             clear_canvas()
-            background.draw(CANVAS_WIDTH // 2, CANVAS_HEIGHT // 2)
+            background.draw(CANVAS_WIDTH // 2, CANVAS_HEIGHT // 2, CANVAS_WIDTH, CANVAS_HEIGHT)
             source_x, source_y, width, height = boy.clip()
-            sprite.clip_draw(source_x, source_y, width, height, boy.x, boy.y)
+            sprite.clip_draw(source_x, source_y, width, height,
+                             boy.x, boy.y, DISPLAY_SIZE, DISPLAY_SIZE)
             update_canvas()
             delay(1 / 60)
     finally:

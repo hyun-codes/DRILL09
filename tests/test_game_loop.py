@@ -28,14 +28,15 @@ class GameLoopTests(unittest.TestCase):
              patch.object(game, "delay"):
             game.run()
 
-        open_canvas.assert_called_once_with(1280, 1024)
+        open_canvas.assert_called_once_with(800, 640)
         self.assertEqual(load_image.call_args_list[0].args, (str(game.ASSET_DIR / "TUK_GROUND.png"),))
         self.assertEqual(load_image.call_args_list[1].args, (str(game.ASSET_DIR / "animation_sheet.png"),))
-        background.draw.assert_called_with(640, 512)
+        background.draw.assert_called_with(400, 320, 800, 640)
         first_draw = sprite.clip_draw.call_args_list[0].args
         self.assertEqual(first_draw[:4], (0, 0, 100, 100))
-        self.assertLess(first_draw[4], 640)
-        self.assertGreater(first_draw[5], 512)
+        self.assertLess(first_draw[4], 400)
+        self.assertGreater(first_draw[5], 320)
+        self.assertEqual(first_draw[6:], (64, 64))
         close_canvas.assert_called_once()
 
     def test_escape_closes_canvas(self):

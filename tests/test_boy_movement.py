@@ -3,7 +3,7 @@
 import math
 import unittest
 
-from boy_movement import Boy, CANVAS_HEIGHT, CANVAS_WIDTH, FRAME_SIZE
+from boy_movement import Boy, CANVAS_HEIGHT, CANVAS_WIDTH, DISPLAY_SIZE
 
 
 class BoyMovementTests(unittest.TestCase):
@@ -30,7 +30,7 @@ class BoyMovementTests(unittest.TestCase):
                     self.assertEqual(boy.x > CANVAS_WIDTH / 2, horizontal == "right")
                     self.assertEqual(boy.y > CANVAS_HEIGHT / 2, vertical == "up")
                     self.assertAlmostEqual(math.hypot(boy.x - CANVAS_WIDTH / 2,
-                                                      boy.y - CANVAS_HEIGHT / 2), 15.0)
+                                                      boy.y - CANVAS_HEIGHT / 2), 10.0)
 
     def test_vertical_movement_keeps_facing(self):
         boy = Boy()
@@ -71,10 +71,13 @@ class BoyMovementTests(unittest.TestCase):
                 boy.press(vertical)
                 for _ in range(500):
                     boy.update(0.05)
-                self.assertGreaterEqual(boy.x, FRAME_SIZE / 2)
-                self.assertLessEqual(boy.x, CANVAS_WIDTH - FRAME_SIZE / 2)
-                self.assertGreaterEqual(boy.y, FRAME_SIZE / 2)
-                self.assertLessEqual(boy.y, CANVAS_HEIGHT - FRAME_SIZE / 2)
+                self.assertGreaterEqual(boy.x, DISPLAY_SIZE / 2)
+                self.assertLessEqual(boy.x, CANVAS_WIDTH - DISPLAY_SIZE / 2)
+                self.assertGreaterEqual(boy.y, DISPLAY_SIZE / 2)
+                self.assertLessEqual(boy.y, CANVAS_HEIGHT - DISPLAY_SIZE / 2)
+                expected_x = DISPLAY_SIZE / 2 if horizontal == "left" else CANVAS_WIDTH - DISPLAY_SIZE / 2
+                expected_y = DISPLAY_SIZE / 2 if vertical == "down" else CANVAS_HEIGHT - DISPLAY_SIZE / 2
+                self.assertEqual((boy.x, boy.y), (expected_x, expected_y))
 
     def test_opposite_keys_cancel_and_release_restores_direction(self):
         boy = Boy()
@@ -91,7 +94,7 @@ class BoyMovementTests(unittest.TestCase):
         boy = Boy()
         boy.press("right")
         boy.update(10.0)
-        self.assertAlmostEqual(boy.x - CANVAS_WIDTH / 2, 15.0)
+        self.assertAlmostEqual(boy.x - CANVAS_WIDTH / 2, 10.0)
 
 
 if __name__ == "__main__":

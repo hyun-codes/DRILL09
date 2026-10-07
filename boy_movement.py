@@ -3,12 +3,13 @@
 from dataclasses import dataclass, field
 from math import hypot
 
-CANVAS_WIDTH = 1280
-CANVAS_HEIGHT = 1024
+CANVAS_WIDTH = 800
+CANVAS_HEIGHT = 640
 FRAME_SIZE = 100
+DISPLAY_SIZE = 64
 FRAME_COUNT = 8
 FRAME_DURATION = 0.1
-MOVE_SPEED = 300.0
+MOVE_SPEED = 200.0
 MAX_DT = 0.05
 DIRECTIONS = frozenset({"left", "right", "up", "down"})
 
@@ -51,8 +52,8 @@ class Boy:
         if length:
             self.x += dx / length * distance
             self.y += dy / length * distance
-        self.x = min(max(self.x, FRAME_SIZE / 2), CANVAS_WIDTH - FRAME_SIZE / 2)
-        self.y = min(max(self.y, FRAME_SIZE / 2), CANVAS_HEIGHT - FRAME_SIZE / 2)
+        self.x = min(max(self.x, DISPLAY_SIZE / 2), CANVAS_WIDTH - DISPLAY_SIZE / 2)
+        self.y = min(max(self.y, DISPLAY_SIZE / 2), CANVAS_HEIGHT - DISPLAY_SIZE / 2)
         self.frame_time += max(dt, 0.0)
         while self.frame_time >= FRAME_DURATION:
             self.frame = (self.frame + 1) % FRAME_COUNT
