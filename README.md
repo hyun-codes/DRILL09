@@ -5,7 +5,7 @@
 Python과 `pico2d`가 설치된 환경에서 이 폴더를 작업 디렉터리로 열고 실행한다.
 
 ```bash
-python boy_eight_direction_movement.py
+python Drill09_movement.py
 ```
 
 ## 조작
@@ -22,4 +22,4 @@ python boy_eight_direction_movement.py
 python -m unittest discover -s tests -v
 ```
 
-게임은 `boy_eight_direction_movement.py`, 화면과 분리된 이동 및 애니메이션 상태는 `boy_movement.py`에 있다. 기존 수업 예제 파일은 수정하지 않았다.
+게임은 `Drill09_movement.py`, 화면과 분리된 이동 및 애니메이션 상태는 `boy_movement.py`에 있다. 기존 수업 예제 파일은 수정하지 않았다.

@@ -4,7 +4,7 @@ import unittest
 from types import SimpleNamespace
 from unittest.mock import Mock, patch
 
-import boy_eight_direction_movement as game
+import Drill09_movement as game
 
 
 class GameLoopTests(unittest.TestCase):
