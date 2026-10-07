@@ -37,6 +37,10 @@ class Boy:
         if length:
             self.x += dx / length * distance
             self.y += dy / length * distance
+        self.frame_time += max(dt, 0.0)
+        while self.frame_time >= FRAME_DURATION:
+            self.frame = (self.frame + 1) % FRAME_COUNT
+            self.frame_time -= FRAME_DURATION
 
     def clip(self) -> tuple[int, int, int, int]:
-        return 0, 3 * FRAME_SIZE, FRAME_SIZE, FRAME_SIZE
+        return self.frame * FRAME_SIZE, 3 * FRAME_SIZE, FRAME_SIZE, FRAME_SIZE
