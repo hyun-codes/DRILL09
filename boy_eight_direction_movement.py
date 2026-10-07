@@ -58,6 +58,9 @@ def run() -> None:
                     if direction:
                         boy.release(direction)
 
+            if not running:
+                break
+
             boy.update(dt)
 
             clear_canvas()
