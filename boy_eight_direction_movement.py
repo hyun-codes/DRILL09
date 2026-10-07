@@ -10,6 +10,7 @@ from pico2d import (
     SDLK_UP,
     SDLK_DOWN,
     SDL_KEYUP,
+    SDLK_ESCAPE,
     clear_canvas,
     close_canvas,
     delay,
@@ -45,6 +46,8 @@ def run() -> None:
 
             for event in get_events():
                 if event.type == SDL_QUIT:
+                    running = False
+                elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
                     running = False
                 elif event.type == SDL_KEYDOWN:
                     direction = KEY_NAMES.get(event.key)
