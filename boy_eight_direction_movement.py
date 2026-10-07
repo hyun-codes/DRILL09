@@ -21,6 +21,7 @@ def run() -> None:
     open_canvas(CANVAS_WIDTH, CANVAS_HEIGHT)
     try:
         background = load_image("TUK_GROUND.png")
+        sprite = load_image("animation_sheet.png")
         running = True
         previous_time = perf_counter()
 
@@ -35,6 +36,7 @@ def run() -> None:
 
             clear_canvas()
             background.draw(CANVAS_WIDTH // 2, CANVAS_HEIGHT // 2)
+            sprite.clip_draw(0, 300, 100, 100, CANVAS_WIDTH // 2, CANVAS_HEIGHT // 2)
             update_canvas()
             delay(1 / 60)
     finally:
