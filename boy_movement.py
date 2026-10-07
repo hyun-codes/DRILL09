@@ -1,6 +1,7 @@
 """소년의 입력, 이동, 애니메이션을 화면 처리와 분리한 상태 모델."""
 
 from dataclasses import dataclass, field
+from math import hypot
 
 CANVAS_WIDTH = 1280
 CANVAS_HEIGHT = 1024
@@ -30,8 +31,10 @@ class Boy:
         dx = int("right" in self.held) - int("left" in self.held)
         dy = int("up" in self.held) - int("down" in self.held)
         distance = MOVE_PER_FRAME
-        self.x += dx * distance
-        self.y += dy * distance
+        length = hypot(dx, dy)
+        if length:
+            self.x += dx / length * distance
+            self.y += dy / length * distance
 
     def clip(self) -> tuple[int, int, int, int]:
         return 0, 3 * FRAME_SIZE, FRAME_SIZE, FRAME_SIZE
