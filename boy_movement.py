@@ -50,6 +50,7 @@ class Boy:
             self.x += dx / length * distance
             self.y += dy / length * distance
         self.x = min(max(self.x, FRAME_SIZE / 2), CANVAS_WIDTH - FRAME_SIZE / 2)
+        self.y = min(max(self.y, FRAME_SIZE / 2), CANVAS_HEIGHT - FRAME_SIZE / 2)
         self.frame_time += max(dt, 0.0)
         while self.frame_time >= FRAME_DURATION:
             self.frame = (self.frame + 1) % FRAME_COUNT
