@@ -9,6 +9,7 @@ from pico2d import (
     SDLK_RIGHT,
     SDLK_UP,
     SDLK_DOWN,
+    SDL_KEYUP,
     clear_canvas,
     close_canvas,
     delay,
@@ -49,6 +50,10 @@ def run() -> None:
                     direction = KEY_NAMES.get(event.key)
                     if direction:
                         boy.press(direction)
+                elif event.type == SDL_KEYUP:
+                    direction = KEY_NAMES.get(event.key)
+                    if direction:
+                        boy.release(direction)
 
             boy.update(dt)
 

@@ -29,6 +29,13 @@ class Boy:
         if direction in ("left", "right"):
             self.facing = direction
 
+    def release(self, direction: str) -> None:
+        self.held.discard(direction)
+        if direction == self.facing:
+            opposite = "right" if direction == "left" else "left"
+            if opposite in self.held:
+                self.facing = opposite
+
     def update(self, dt: float) -> None:
         dx = int("right" in self.held) - int("left" in self.held)
         dy = int("up" in self.held) - int("down" in self.held)
