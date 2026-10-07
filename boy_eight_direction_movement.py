@@ -7,6 +7,8 @@ from pico2d import (
     SDL_KEYDOWN,
     SDLK_LEFT,
     SDLK_RIGHT,
+    SDLK_UP,
+    SDLK_DOWN,
     clear_canvas,
     close_canvas,
     delay,
@@ -21,6 +23,8 @@ from boy_movement import Boy, CANVAS_HEIGHT, CANVAS_WIDTH
 KEY_NAMES = {
     SDLK_LEFT: "left",
     SDLK_RIGHT: "right",
+    SDLK_UP: "up",
+    SDLK_DOWN: "down",
 }
 
 
