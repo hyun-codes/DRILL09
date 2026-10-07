@@ -30,10 +30,8 @@ class Boy:
         dx = int("right" in self.held) - int("left" in self.held)
         dy = int("up" in self.held) - int("down" in self.held)
         distance = MOVE_PER_FRAME
-        if dx:
-            self.x += dx * distance
-        else:
-            self.y += dy * distance
+        self.x += dx * distance
+        self.y += dy * distance
 
     def clip(self) -> tuple[int, int, int, int]:
         return 0, 3 * FRAME_SIZE, FRAME_SIZE, FRAME_SIZE
