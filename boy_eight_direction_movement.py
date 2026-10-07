@@ -13,8 +13,7 @@ from pico2d import (
     update_canvas,
 )
 
-CANVAS_WIDTH = 1280
-CANVAS_HEIGHT = 1024
+from boy_movement import Boy, CANVAS_HEIGHT, CANVAS_WIDTH
 
 
 def run() -> None:
@@ -22,6 +21,7 @@ def run() -> None:
     try:
         background = load_image("TUK_GROUND.png")
         sprite = load_image("animation_sheet.png")
+        boy = Boy()
         running = True
         previous_time = perf_counter()
 
@@ -34,9 +34,12 @@ def run() -> None:
                 if event.type == SDL_QUIT:
                     running = False
 
+            boy.update(dt)
+
             clear_canvas()
             background.draw(CANVAS_WIDTH // 2, CANVAS_HEIGHT // 2)
-            sprite.clip_draw(0, 300, 100, 100, CANVAS_WIDTH // 2, CANVAS_HEIGHT // 2)
+            source_x, source_y, width, height = boy.clip()
+            sprite.clip_draw(source_x, source_y, width, height, boy.x, boy.y)
             update_canvas()
             delay(1 / 60)
     finally:
