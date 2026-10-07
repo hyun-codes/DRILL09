@@ -32,6 +32,36 @@ class BoyMovementTests(unittest.TestCase):
                     self.assertAlmostEqual(math.hypot(boy.x - CANVAS_WIDTH / 2,
                                                       boy.y - CANVAS_HEIGHT / 2), 15.0)
 
+def test_vertical_movement_keeps_facing(self):
+    boy = Boy()
+    boy.press("left")
+    boy.update(0.05)
+    boy.release("left")
+    boy.press("up")
+    boy.update(0.05)
+    self.assertEqual(boy.facing, "left")
+    self.assertEqual(boy.clip()[1], 0)
+
+def test_releasing_last_direction_returns_to_idle(self):
+    boy = Boy()
+    boy.press("right")
+    boy.update(0.05)
+    self.assertTrue(boy.moving)
+    boy.release("right")
+    boy.update(0.05)
+    self.assertFalse(boy.moving)
+    self.assertEqual(boy.clip()[1], 300)
+
+def test_animation_advances_and_resets_on_state_change(self):
+    boy = Boy()
+    boy.update(0.05)
+    boy.update(0.05)
+    self.assertEqual(boy.frame, 1)
+    boy.press("left")
+    boy.update(0.05)
+    self.assertEqual(boy.frame, 0)
+    self.assertEqual(boy.clip()[1], 0)
+
 
 if __name__ == "__main__":
     unittest.main()
