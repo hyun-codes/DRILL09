@@ -32,6 +32,11 @@ class Boy:
     def update(self, dt: float) -> None:
         dx = int("right" in self.held) - int("left" in self.held)
         dy = int("up" in self.held) - int("down" in self.held)
+        is_moving = dx != 0 or dy != 0
+        if is_moving != self.moving:
+            self.frame = 0
+            self.frame_time = 0.0
+        self.moving = is_moving
         distance = MOVE_PER_FRAME
         length = hypot(dx, dy)
         if length:
