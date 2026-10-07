@@ -27,7 +27,9 @@ class Boy:
         self.held.add(direction)
 
     def update(self, dt: float) -> None:
-        pass
+        dx = int("right" in self.held) - int("left" in self.held)
+        distance = MOVE_PER_FRAME
+        self.x += dx * distance
 
     def clip(self) -> tuple[int, int, int, int]:
         return 0, 3 * FRAME_SIZE, FRAME_SIZE, FRAME_SIZE

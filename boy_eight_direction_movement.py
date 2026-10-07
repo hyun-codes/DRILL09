@@ -4,6 +4,9 @@ from time import perf_counter
 
 from pico2d import (
     SDL_QUIT,
+    SDL_KEYDOWN,
+    SDLK_LEFT,
+    SDLK_RIGHT,
     clear_canvas,
     close_canvas,
     delay,
@@ -14,6 +17,11 @@ from pico2d import (
 )
 
 from boy_movement import Boy, CANVAS_HEIGHT, CANVAS_WIDTH
+
+KEY_NAMES = {
+    SDLK_LEFT: "left",
+    SDLK_RIGHT: "right",
+}
 
 
 def run() -> None:
@@ -33,6 +41,10 @@ def run() -> None:
             for event in get_events():
                 if event.type == SDL_QUIT:
                     running = False
+                elif event.type == SDL_KEYDOWN:
+                    direction = KEY_NAMES.get(event.key)
+                    if direction:
+                        boy.press(direction)
 
             boy.update(dt)
 
