@@ -2,7 +2,7 @@
 
 ## 실행
 
-Python과 `pico2d`가 설치된 환경에서 이 폴더를 작업 디렉터리로 열고 실행한다.
+Python과 `pico2d`가 설치된 환경에서 실행한다. 이미지 경로는 실행 파일의 위치를 기준으로 찾는다.
 
 ```bash
 python Drill09_movement.py

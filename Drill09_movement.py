@@ -1,6 +1,7 @@
 """방향키로 소년을 8방향으로 움직이는 Pico2D 과제 실행 파일."""
 
 from time import perf_counter
+from pathlib import Path
 
 from pico2d import (
     SDL_QUIT,
@@ -22,6 +23,8 @@ from pico2d import (
 
 from boy_movement import Boy, CANVAS_HEIGHT, CANVAS_WIDTH
 
+ASSET_DIR = Path(__file__).resolve().parent
+
 KEY_NAMES = {
     SDLK_LEFT: "left",
     SDLK_RIGHT: "right",
@@ -33,8 +36,8 @@ KEY_NAMES = {
 def run() -> None:
     open_canvas(CANVAS_WIDTH, CANVAS_HEIGHT)
     try:
-        background = load_image("TUK_GROUND.png")
-        sprite = load_image("animation_sheet.png")
+        background = load_image(str(ASSET_DIR / "TUK_GROUND.png"))
+        sprite = load_image(str(ASSET_DIR / "animation_sheet.png"))
         boy = Boy()
         running = True
         previous_time = perf_counter()

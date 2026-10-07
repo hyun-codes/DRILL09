@@ -29,8 +29,8 @@ class GameLoopTests(unittest.TestCase):
             game.run()
 
         open_canvas.assert_called_once_with(1280, 1024)
-        self.assertEqual(load_image.call_args_list[0].args, ("TUK_GROUND.png",))
-        self.assertEqual(load_image.call_args_list[1].args, ("animation_sheet.png",))
+        self.assertEqual(load_image.call_args_list[0].args, (str(game.ASSET_DIR / "TUK_GROUND.png"),))
+        self.assertEqual(load_image.call_args_list[1].args, (str(game.ASSET_DIR / "animation_sheet.png"),))
         background.draw.assert_called_with(640, 512)
         first_draw = sprite.clip_draw.call_args_list[0].args
         self.assertEqual(first_draw[:4], (0, 0, 100, 100))
