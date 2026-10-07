@@ -26,6 +26,8 @@ class Boy:
         if direction not in DIRECTIONS:
             return
         self.held.add(direction)
+        if direction in ("left", "right"):
+            self.facing = direction
 
     def update(self, dt: float) -> None:
         dx = int("right" in self.held) - int("left" in self.held)
