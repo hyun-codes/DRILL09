@@ -48,4 +48,10 @@ class Boy:
             self.frame_time -= FRAME_DURATION
 
     def clip(self) -> tuple[int, int, int, int]:
-        return self.frame * FRAME_SIZE, 3 * FRAME_SIZE, FRAME_SIZE, FRAME_SIZE
+        row = {
+            (False, "right"): 3,
+            (False, "left"): 2,
+            (True, "right"): 1,
+            (True, "left"): 0,
+        }[(self.moving, self.facing)]
+        return self.frame * FRAME_SIZE, row * FRAME_SIZE, FRAME_SIZE, FRAME_SIZE
