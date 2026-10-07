@@ -8,7 +8,8 @@ CANVAS_HEIGHT = 1024
 FRAME_SIZE = 100
 FRAME_COUNT = 8
 FRAME_DURATION = 0.1
-MOVE_PER_FRAME = 5.0
+MOVE_SPEED = 300.0
+MAX_DT = 0.05
 DIRECTIONS = frozenset({"left", "right", "up", "down"})
 
 
@@ -37,6 +38,7 @@ class Boy:
                 self.facing = opposite
 
     def update(self, dt: float) -> None:
+        dt = min(max(dt, 0.0), MAX_DT)
         dx = int("right" in self.held) - int("left" in self.held)
         dy = int("up" in self.held) - int("down" in self.held)
         is_moving = dx != 0 or dy != 0
@@ -44,7 +46,7 @@ class Boy:
             self.frame = 0
             self.frame_time = 0.0
         self.moving = is_moving
-        distance = MOVE_PER_FRAME
+        distance = MOVE_SPEED * dt
         length = hypot(dx, dy)
         if length:
             self.x += dx / length * distance
